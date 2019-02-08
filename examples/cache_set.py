@@ -22,7 +22,13 @@ n_processes = 10
 
 process_list = []
 
+# Insert a value with corresponding key
+print("Start")
+store.set_value(key, slow_fn(**kwarg_dict))
+print("Value inserted")
+
 # Create a set of processes who will request the same value
+# However this key already exists and none of these processes will call slow_fn
 for i in range(n_processes):
     p = mp.Process(target=store.get_value, args=(key, slow_fn, kwarg_dict))
     process_list.append(p)

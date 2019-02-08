@@ -1,4 +1,4 @@
-from cache import KVStoreJIT
+from cache import KVStore
 from concurrent.futures import ThreadPoolExecutor
 import json
 import time
@@ -8,7 +8,7 @@ def slow_fn(input_1, input_2):
     time.sleep(1)
     return input_1 * input_2
 
-store = KVStoreJIT()
+store = KVStore()
 
 n_threads = 10
 

@@ -1,4 +1,4 @@
-from cache import KVStoreJIT
+from cache import KVStore
 import json
 from multiprocessing import Manager
 import time
@@ -14,7 +14,7 @@ manager = Manager()
 initial_dict = manager.dict({object_id: slow_fn(10, 2)})
 
 # Initialise the store with some objects
-store = KVStoreJIT(manager, initial_dict)
+store = KVStore(manager, initial_dict)
 
 # Try to retrieve the object or create it if it doesn't exist
 value1 = store.get_value(object_id, slow_fn, {'input_1': 10, 'input_2': 4})

@@ -1,28 +1,6 @@
 from multiprocessing import Manager
 
-class ThingStoreJIT():
-
-    def __init__(self):
-
-        self.__manager = Manager()
-        self.__thing_list = self.__manager.list()
-        self.__lock = self.__manager.Lock()
-
-    def get_value(self, producer_fn = None, fn_kwargs = None):
-
-        self.__lock.acquire()
-
-        if len(self.__thing_list) == 0:
-            if producer_fn is None:
-                raise Exception("No function defined to generate value")
-
-            self.__thing_list.append(producer_fn(**fn_kwargs))
-
-        self.__lock.release()
-
-        return self.__thing_list[0]
-
-class KVStoreJIT():
+class KVStore():
 
     def __init__(self, manager = None, initial_dict = None):
 
