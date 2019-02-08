@@ -1,5 +1,5 @@
 import multiprocessing as mp
-from cache import KVStore
+from jitcache import KVStore
 import time
 import json
 

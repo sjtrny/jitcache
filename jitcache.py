@@ -25,6 +25,10 @@ class KVStore():
         # So we don't bother creating locks for objects that already exist
 
     def get_value(self, key, producer_fn=None, fn_kwargs=None):
+        """
+        blah blah blah\
+        """
+
 
         if key not in self.__items:
             # Check if lock created for key

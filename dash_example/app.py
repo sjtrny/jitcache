@@ -1,7 +1,7 @@
 import dash
 import dash_html_components as html
 import time
-from cache import KVStore
+from jitcache import KVStore
 import json
 
 store = KVStore()

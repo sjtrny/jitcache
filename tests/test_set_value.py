@@ -1,4 +1,4 @@
-from cache import KVStore
+from jitcache import KVStore
 import json
 
 def slow_fn(input_1, input_2):

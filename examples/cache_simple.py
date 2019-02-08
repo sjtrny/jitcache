@@ -1,4 +1,4 @@
-from cache import KVStore
+from jitcache import KVStore
 import time
 import json
 

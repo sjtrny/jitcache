@@ -1,4 +1,4 @@
-from cache import KVStore
+from jitcache import KVStore
 from concurrent.futures import ThreadPoolExecutor
 import json
 import time

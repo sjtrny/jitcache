@@ -1,4 +1,4 @@
-from cache import KVStore
+from jitcache import KVStore
 from multiprocessing import Manager
 import time
 
