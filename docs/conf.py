@@ -71,7 +71,19 @@ language = None
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = None
+pygments_style = 'sphinx'
+
+autoclass_content = "both"  # include both class docstring and __init__
+autodoc_default_flags = [
+    # Make sure that any autodoc declarations show the right members
+    "members",
+    "inherited-members",
+    "private-members",
+    "show-inheritance",
+]
+autosummary_generate = True  # Make _autosummary files and include them
+napoleon_numpy_docstring = False  # Force consistency, leave only Google
+napoleon_use_rtype = False  # More legible
 
 
 # -- Options for HTML output -------------------------------------------------

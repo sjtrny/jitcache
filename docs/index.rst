@@ -26,6 +26,7 @@ Examples and specific information on classes and methods are below.
 .. toctree::
    :maxdepth: 2
 
+   dash
    examples
    api
 
