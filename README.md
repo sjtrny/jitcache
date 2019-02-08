@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sjtrny/jitcache.svg?branch=master)](https://travis-ci.org/sjtrny/jitcache)
+
 # jitcache
 
 jitcache is a just-in-time key-value cache that is thread/process safe. jitcache also prevents repeated computation
