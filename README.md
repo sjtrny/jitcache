@@ -12,7 +12,7 @@ jitcache was designed to improve the performance of Plot.ly Dash apps by caching
 Installation
 -------------------
 
-Install via pip::
+Install via pip:
 
     $ pip install jitcache
 
