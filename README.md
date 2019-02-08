@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/sjtrny/jitcache.svg?branch=master)](https://travis-ci.org/sjtrny/jitcache)
 [![Documentation Status](https://readthedocs.org/projects/jitcache/badge/?version=latest)](https://jitcache.readthedocs.io/en/latest/?badge=latest)
+[![Downloads](https://pepy.tech/badge/jitcache)](https://pepy.tech/project/jitcache)
 
 # jitcache
 
