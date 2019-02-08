@@ -1,5 +1,4 @@
 from cache import KVStore
-import json
 from multiprocessing import Manager
 import time
 
