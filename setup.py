@@ -13,7 +13,7 @@ with open(path.join(path.dirname(__file__), 'README.md'), encoding='utf-8') as f
 
 setup(
     name = "jitcache",
-    version = "0.1",
+    version = "0.2",
     description = "jitcache is a just-in-time key-value cache that is thread/process safe",
     long_description = long_description,
     long_description_content_type = 'text/markdown',
