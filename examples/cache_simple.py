@@ -1,4 +1,3 @@
-import multiprocessing as mp
 from cache import KVStore
 import time
 import json
