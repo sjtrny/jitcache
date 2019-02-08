@@ -14,7 +14,7 @@ KVStore object will be created for each process.
 
 Use the following command to start your server:
 
-    gunicorn --preload app:server
+    ``gunicorn --preload app:server``
 
 You can find more details here http://docs.gunicorn.org/en/stable/settings.html#preload-app
 
