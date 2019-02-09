@@ -1,6 +1,70 @@
 from multiprocessing import Manager
+from functools import wraps
+import json
+import inspect
 
-class KVStore():
+class FunctionCache:
+
+    def __init__(self,):
+        """
+        Create a new function cache
+
+        """
+        self.__manager = Manager()
+        self.__lock_access_lock = self.__manager.Lock()
+        self.__locks = self.__manager.dict()
+        self.__items = self.__manager.dict()
+
+    @staticmethod
+    def __get_key(func, args, kwargs):
+        func_id = id(func)
+        return str(func_id) + json.dumps(args, sort_keys=True) + json.dumps(kwargs, sort_keys=True)
+
+    @staticmethod
+    def __get_default_kwargs(func):
+        signature = inspect.signature(func)
+        return {
+            k: v.default
+            for k, v in signature.parameters.items()
+            if v.default is not inspect.Parameter.empty
+        }
+
+    def memoize(self, func):
+
+        @wraps(func)
+        def decorated(*args, **kwargs):
+            kwargs_dict = self.__get_default_kwargs(func)
+            kwargs_dict.update(kwargs)
+
+            key = self.__get_key(func, args, kwargs_dict)
+
+            print(key)
+
+            # Check if this function is already cached
+            if key not in self.__items:
+
+                # Check if lock created for key
+                # Prevent this code from being called twice
+                if key not in self.__locks:
+                    self.__lock_access_lock.acquire()
+                    if key not in self.__locks:
+                        self.__locks[key] = self.__manager.Lock()
+                    self.__lock_access_lock.release()
+
+                # Create
+                self.__locks[key].acquire()
+                if key not in self.__items:
+                    self.__items[key] = func(*args, **kwargs)
+                self.__locks[key].release()
+
+            return self.__items[key]
+
+        return decorated
+
+    # TODO: Implement clear cache, requires acquire all item locks first as well as global lock
+
+
+class KVStore:
     """
     """
 
