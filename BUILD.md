@@ -50,6 +50,10 @@ discover any test files
 CI is performed on Travis. The configuration file is
 
     .travis.yml
+    
+A slight modification needed to be made to the normal Travis config in order
+for Python 3.7 to work
+https://github.com/travis-ci/travis-ci/issues/9069#issuecomment-425720905
 
 # PEP8 Formatting
 
