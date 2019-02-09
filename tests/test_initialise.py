@@ -3,19 +3,18 @@ from multiprocessing import Manager
 import time
 import json
 
+
 def slow_fn(input_1, input_2):
     print("Slow Function Called")
     time.sleep(1)
     return input_1 * input_2
 
+
 def test_initialise():
 
     manager = Manager()
 
-    kwarg_dict = {
-        'input_1': 10,
-        'input_2': 4
-    }
+    kwarg_dict = {"input_1": 10, "input_2": 4}
 
     # Make a unique identifier for this object
     key = json.dumps(kwarg_dict, sort_keys=True)

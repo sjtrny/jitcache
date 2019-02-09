@@ -3,8 +3,8 @@ from functools import wraps
 import json
 import inspect
 
-class FunctionCache:
 
+class FunctionCache:
     def __init__(self,):
         """
         Create a new function cache
@@ -18,7 +18,11 @@ class FunctionCache:
     @staticmethod
     def __get_key(func, args, kwargs):
         func_id = id(func)
-        return str(func_id) + json.dumps(args, sort_keys=True) + json.dumps(kwargs, sort_keys=True)
+        return (
+            str(func_id)
+            + json.dumps(args, sort_keys=True)
+            + json.dumps(kwargs, sort_keys=True)
+        )
 
     @staticmethod
     def __get_default_kwargs(func):
@@ -30,7 +34,6 @@ class FunctionCache:
         }
 
     def memoize(self, func):
-
         @wraps(func)
         def decorated(*args, **kwargs):
             kwargs_dict = self.__get_default_kwargs(func)
@@ -61,24 +64,31 @@ class FunctionCache:
 
         return decorated
 
-    # TODO: Implement clear cache, requires acquire all item locks first as well as global lock
+    # TODO: Implement clear cache, must acquire global lock and all item locks
 
 
 class KVStore:
     """
     """
 
-    def __init__(self, manager = None, initial_dict = None):
+    def __init__(self, manager=None, initial_dict=None):
         """
-        Create a new key-value store with an option intial_dict, which requires an external multiprocessing.Manager()
+        Create a new key-value store with an option intial_dict, which requires
+        an external multiprocessing.Manager()
 
         Args:
-            manager (multiprocessing.Manager): an external multiprocessing.Manager that was used to create ``initial_dict``
-            initial_dict (multiprocessing.Manager.dict): a multiprocessing.Manager.dict
+            manager (multiprocessing.Manager): an external
+                multiprocessing.Manager that was used to create
+                ``initial_dict``
+            initial_dict (multiprocessing.Manager.dict): a
+                multiprocessing.Manager.dict
         """
 
         if initial_dict is not None and manager is None:
-            raise Exception("You must pass an accompanying Manager with your initial dictionary")
+            raise Exception(
+                "You must pass an accompanying Manager with your initial"
+                " dictionary"
+            )
 
         if manager is None:
             self.__manager = Manager()
@@ -94,12 +104,14 @@ class KVStore:
         else:
             self.__items = self.__manager.dict()
 
-        # For some reason, if we initialise the locks dictionary here, our code will fail later
+        # For some reason, if we initialise the locks dictionary here, our
+        # code will fail later
         # So we don't bother creating locks for objects that already exist
 
     def get_value(self, key, producer_fn=None, fn_kwargs=None):
         """
-        Request a value from the store and generate the object via producer_fn if it does not exist.
+        Request a value from the store and generate the object via producer_fn
+        if it does not exist.
 
         Args:
             key (hashable): the unique identifier of the object in the store

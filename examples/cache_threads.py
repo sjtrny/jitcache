@@ -3,10 +3,12 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 import time
 
+
 def slow_fn(input_1, input_2):
     print("Slow Function Called")
     time.sleep(1)
     return input_1 * input_2
+
 
 store = KVStore()
 
@@ -21,10 +23,7 @@ n_requests = 5
 
 # Set up n requests for an object
 for i in range(n_requests):
-    kwarg_dict = {
-        'input_1': 10,
-        'input_2': 4
-    }
+    kwarg_dict = {"input_1": 10, "input_2": 4}
 
     key = json.dumps(kwarg_dict, sort_keys=True)
     f = executor.submit(store.get_value, key, slow_fn, kwarg_dict)
@@ -33,10 +32,7 @@ for i in range(n_requests):
 
 # Set up n requests for an object
 for i in range(n_requests):
-    kwarg_dict = {
-        'input_1': 20,
-        'input_2': 6
-    }
+    kwarg_dict = {"input_1": 20, "input_2": 6}
 
     key = json.dumps(kwarg_dict, sort_keys=True)
     f = executor.submit(store.get_value, key, slow_fn, kwarg_dict)
