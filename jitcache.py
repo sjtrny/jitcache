@@ -40,18 +40,11 @@ class Cache:
         @wraps(func)
         def decorated(*args, **kwargs):
 
-            all_arg_names = [
-                k for k, v in inspect.signature(func).parameters.items()
-            ]
-
-            default_kwargs_dict = self.__get_default_kwargs(func)
-            default_kwargs_dict.update(kwargs)
-
-            all_arg_values = list(args) + list(default_kwargs_dict.values())
-
-            kwargs_dict = dict(zip(all_arg_names, all_arg_values))
+            kwargs_dict = inspect.getcallargs(func, *args, **kwargs)
 
             key = self.__get_key(func, kwargs_dict)
+
+            print(key)
 
             # Check if this function is already cached
             if key not in self.__items:

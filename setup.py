@@ -16,7 +16,7 @@ with open(
 
 setup(
     name="jitcache",
-    version="0.3",
+    version="0.31",
     description="jitcache is a just-in-time key-value cache that is"
     "thread/process safe",
     long_description=long_description,
