@@ -1,10 +1,11 @@
 import dash
 import dash_html_components as html
 import time
-from jitcache import KVStore
-import json
+from jitcache import Cache
+import dash_core_components as dcc
 
-store = KVStore()
+
+cache = Cache()
 
 app = dash.Dash(__name__)
 
@@ -19,6 +20,7 @@ app.layout = html.Div(
 
 
 # This is only called once per click
+@cache.memoize
 def slow_fn(input_1, input_2):
     print("Slow Function Called")
     time.sleep(1)
@@ -33,12 +35,7 @@ def update_output1(n_clicks):
     input_1 = n_clicks if n_clicks is not None else 0
     input_2 = 2
 
-    kwarg_dict = {"input_1": input_1, "input_2": input_2}
-
-    # Make a unique identifier for this object
-    key = json.dumps(kwarg_dict, sort_keys=True)
-
-    value = store.get_value(key, slow_fn, kwarg_dict)
+    value = slow_fn(input_1, input_2)
 
     return f"Value is {value} and the button has been clicked {n_clicks} times"
 
@@ -51,12 +48,7 @@ def update_output2(n_clicks):
     input_1 = n_clicks if n_clicks is not None else 0
     input_2 = 2
 
-    kwarg_dict = {"input_1": input_1, "input_2": input_2}
-
-    # Make a unique identifier for this object
-    key = json.dumps(kwarg_dict, sort_keys=True)
-
-    value = store.get_value(key, slow_fn, kwarg_dict)
+    value = slow_fn(input_1, input_2)
 
     return f"Value is {value} and the button has been clicked {n_clicks} times"
 

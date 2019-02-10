@@ -30,21 +30,21 @@ Examples and specific information on classes and methods are below.
    examples
    api
 
-Example Usage
+Basic Usage
 -------------------
 
-Notice that ``slow_fn`` is only called once, despite two requests.
-
-.. literalinclude:: ../examples/cache_simple.py
+.. literalinclude:: ../examples/simple.py
    :linenos:
-   :lines: 3-
-   :caption: examples/cache_simple.py
+   :caption: examples/simple.py
 
-Output::
 
-    Slow Function Called
-    40
-    40
+Plot.ly Dash Usage
+-------------------
+
+.. literalinclude:: ../examples_dash/callback_memoize/app.py
+   :linenos:
+   :caption: examples_dash/callback_memoize/app.py
+
 
 Indices and tables
 ==================

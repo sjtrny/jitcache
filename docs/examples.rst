@@ -6,56 +6,22 @@ Examples
 Basic Usage
 --------------------------------------
 
-Notice that ``slow_fn`` is only called once, despite two requests.
-
-.. literalinclude:: ../examples/cache_simple.py
+.. literalinclude:: ../examples/simple.py
    :linenos:
-   :lines: 3-
-   :caption: examples/cache_simple.py
+   :caption: examples/simple.py
 
 Output::
 
     Slow Function Called
     40
-    40
 
-Initialise with an existing dictionary
---------------------------------------
-
-.. literalinclude:: ../examples/cache_initialise.py
-   :linenos:
-   :lines: 3-
-   :caption: examples/cache_initialise.py
-
-Output::
-
-    Slow Function Called
-    Same object
-    20
-    20
-
-Insert a single value into the store
---------------------------------------
-
-.. literalinclude:: ../examples/cache_set.py
-   :linenos:
-   :lines: 3-
-   :caption: examples/cache_set.py
-
-Output::
-
-    Start
-    Slow Function Called
-    Value inserted
-    40
 
 Usage with Threads
 --------------------------------------
 
-.. literalinclude:: ../examples/cache_threads.py
+.. literalinclude:: ../examples/threads.py
    :linenos:
-   :lines: 3-
-   :caption: examples/cache_threads.py
+   :caption: examples/threads.py
 
 Output::
 
@@ -66,10 +32,9 @@ Output::
 Usage with Processes
 --------------------------------------
 
-.. literalinclude:: ../examples/cache_process.py
+.. literalinclude:: ../examples/process.py
    :linenos:
-   :lines: 3-
-   :caption: examples/cache_process.py
+   :caption: examples/process.py
 
 Output::
 
