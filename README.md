@@ -21,39 +21,84 @@ Documentation
 
 Full documentation available here [https://jitcache.readthedocs.io/](https://jitcache.readthedocs.io/en/latest/)
 
-Example Usage
+Basic Usage
 -------------------
 
-Notice that ``slow_fn`` is only called once, despite two requests.
-
-    from cache import KVStore
+    from jitcache import Cache
     import time
-    import json
     
-    store = KVStore()
     
-    def slow_fn(input_1, input_2):
+    cache = Cache()
+    
+    
+    @cache.memoize
+    def slow_fn(input_1, input_2, input_3=10):
         print("Slow Function Called")
         time.sleep(1)
-        return input_1 * input_2
+        return input_1 * input_2 * input_3
     
-    kwarg_dict = {
-        'input_1': 10,
-        'input_2': 4
-    }
     
-    # Make a unique identifier for this object
-    key = json.dumps(kwarg_dict, sort_keys=True)
-    
-    # Insert a value with corresponding key
-    value1 = store.get_value(key, slow_fn, kwarg_dict)
-    
-    value2 = store.get_value(key, slow_fn, kwarg_dict)
-    
-    print(value1), print(value2)
+    print(slow_fn(10, 2))
+
 
  Output:
  
     Slow Function Called
     40
-    40
+
+
+Plot.ly Dash Usage
+-------------------
+
+    import dash
+    import dash_html_components as html
+    from jitcache import Cache
+    import dash_core_components as dcc
+    
+    
+    cache = Cache()
+    
+    app = dash.Dash(__name__)
+    
+    server = app.server
+    app.layout = html.Div(
+        children=[
+            html.Div(id="output-container-dropdown1", children=[]),
+            html.Div(id="output-container-dropdown2", children=[]),
+            dcc.Dropdown(
+                options=[
+                    {"label": "New York City", "value": "NYC"},
+                    {"label": "Montréal", "value": "MTL"},
+                    {"label": "San Francisco", "value": "SF"},
+                ],
+                value="MTL",
+                id="dropdown",
+            ),
+        ]
+    )
+    
+    
+    @app.callback(
+        dash.dependencies.Output("output-container-dropdown1", "children"),
+        [dash.dependencies.Input("dropdown", "value")],
+    )
+    @cache.memoize
+    def update_output1(input_dropdown):
+        print("run1")
+    
+        return input_dropdown
+    
+    
+    @app.callback(
+        dash.dependencies.Output("output-container-dropdown2", "children"),
+        [dash.dependencies.Input("dropdown", "value")],
+    )
+    @cache.memoize
+    def update_output2(input_dropdown):
+        print("run2")
+    
+        return input_dropdown
+    
+    
+    if __name__ == "__main__":
+        app.run_server(debug=True)

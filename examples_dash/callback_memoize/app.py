@@ -1,6 +1,5 @@
 import dash
 import dash_html_components as html
-import time
 from jitcache import Cache
 import dash_core_components as dcc
 
@@ -43,7 +42,7 @@ def update_output1(input_dropdown):
     [dash.dependencies.Input("dropdown", "value")],
 )
 @cache.memoize
-def update_output1(input_dropdown):
+def update_output2(input_dropdown):
     print("run2")
 
     return input_dropdown
