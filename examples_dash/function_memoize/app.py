@@ -2,7 +2,6 @@ import dash
 import dash_html_components as html
 import time
 from jitcache import Cache
-import dash_core_components as dcc
 
 
 cache = Cache()
