@@ -44,8 +44,6 @@ class Cache:
 
             key = self.__get_key(func, kwargs_dict)
 
-            print(key)
-
             # Check if this function is already cached
             if key not in self.__items:
 
