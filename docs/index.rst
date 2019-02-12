@@ -18,6 +18,11 @@ Install via pip::
 
     $ pip install jitcache
 
+Github
+-------------------
+
+http://github.com/sjtrny/jitcache
+
 Documentation
 -------------------
 
