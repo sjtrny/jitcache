@@ -4,7 +4,7 @@
 
 # jitcache
 
-jitcache provides function caching that prevents re-entrant calls. 
+Python function caching that prevents re-entrant calls
 
 Standard caches such as Python's `func_tools.lru_cache` will allow repeated execution of a long-running function until the first successful completion. In contract jitcache will block multiple calls until the first is completed, thus avoiding repeated computation.
 
