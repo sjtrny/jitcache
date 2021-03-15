@@ -6,7 +6,7 @@
 
 Python function caching that prevents re-entrant calls
 
-Standard caches such as Python's `func_tools.lru_cache` will allow repeated execution of a long-running function until the first successful completion. In contract jitcache will block multiple calls until the first is completed, thus avoiding repeated computation.
+Standard caches such as Python's `func_tools.lru_cache` will allow repeated execution of a long-running function until the first successful completion. In contrast jitcache will block multiple calls until the first is completed, thus avoiding repeated computation.
 
 jitcache was designed to improve the performance of Plot.ly Dash apps by caching results and reducing CPU load.
 
